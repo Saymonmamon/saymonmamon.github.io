@@ -1,0 +1,1612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="es"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;BARGACOP - Cyberpunk Shooter&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #1a0d2b;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Orbitron', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>touch-action: none; /* Evita desplazamiento en móviles */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 2vh auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 6vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.2vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#gameInfo {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 90%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 1vh auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 3vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 0 0 5px #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(0, 0, 0, 0.8);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 0.2vw solid #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 1vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 10px #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#gameCanvas {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 50vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 0.5vw solid #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(180deg, #2a1a4a 0%, #1a0d2b 100%);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#background {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.layer {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 200%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-size: 100vw 50vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-repeat: repeat-x;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#cityscape {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: url('data:image/svg+xml;utf8,&lt;svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"&gt;&lt;rect width="800" height="400" fill="%231a0d2b"/&gt;&lt;path d="M0 400 L50 300 L100 350 L150 250 L200 320 L250 280 L300 340 L350 260 L400 310 L450 290 L500 330 L550 270 L600 310 L650 280 L700 340 L750 260 L800 300 Z" fill="%23332255" opacity="0.8"/&gt;&lt;rect x="50" y="200" width="20" height="100" fill="%2300ffff" opacity="0.5"/&gt;&lt;rect x="150" y="150" width="30" height="150" fill="%23ff00ff" opacity="0.5"/&gt;&lt;rect x="300" y="180" width="25" height="120" fill="%2300ffff" opacity="0.5"/&gt;&lt;rect x="500" y="160" width="40" height="140" fill="%23ff00ff" opacity="0.5"/&gt;&lt;/svg&gt;') repeat-x;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: moveBackground 10s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#ground {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: url('data:image/svg+xml;utf8,&lt;svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"&gt;&lt;rect y="370" width="800" height="30" fill="%23002233"/&gt;&lt;path d="M0 370 Q200 360 400 370 T800 370" fill="%2300ffff" opacity="0.7"/&gt;&lt;/svg&gt;') repeat-x;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: moveBackground 5s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 50vh;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes moveBackground {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: translateX(0); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: translateX(-50vw); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#player {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 7vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 10.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 6vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: height 0.1s ease;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.robot {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.robot-head {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 3.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 2.625vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.625vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.robot-eyes {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 2.125vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 0.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff4444;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0.875vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.robot-body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 5.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 5.25vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(45deg, #00ffff, #ff00ff);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 2.625vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.625vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.25vw #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.robot-arm-left {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 3.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 3.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0.875vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.robot-arm-right {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 5.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 2.625vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #00ff00;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 3.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>right: -1.75vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #00ff00;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.machine-gun-barrel {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 3.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 0.875vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #666666;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0.875vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>right: -3.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.375vw #00ff00;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.machine-gun-details {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.75vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 0.875vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #444444;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 1.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>right: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.125vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.robot-leg-left, .robot-leg-right {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.75vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 3.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.robot-leg-left { left: 1.375vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.robot-leg-right { right: 1.375vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.propulsor {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff4444;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: -1.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.propulsor-left { left: 1.375vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.propulsor-right { right: 1.375vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.propulsor-fire {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 2.625vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(to bottom, #ff4444, #ff8800);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: -4.375vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0 0 0.625vw 0.625vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.propulsor-fire-left { left: 1.375vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.propulsor-fire-right { right: 1.375vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.jumping {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: flip 0.5s linear;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes flip {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: rotate(0deg); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: rotate(360deg); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes float {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0%, 100% { transform: translateY(0); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>50% { transform: translateY(-0.25vh); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.bullet {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.875vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #00ff00;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #00ff00;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.grenade {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 3.75vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 3.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff8800;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #ff8800;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.grenade-explosion {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 7.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 7.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: radial-gradient(circle, #ff8800, #ff4444, transparent);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: grenadeExplode 0.5s forwards;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes grenadeExplode {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: scale(0); opacity: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: scale(2); opacity: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 7.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: left 0.2s ease, height 0.1s ease;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: float 1.5s infinite ease-in-out;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-robot {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-turban {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 6.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1.875vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(to right, #ffffff, #dddddd);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: -0.625vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.625vw 0.625vw 0 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #aaaaaa, inset 0.625vw 0 0.625vw rgba(0, 0, 0, 0.2), inset -0.625vw 0 0.625vw rgba(0, 0, 0, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-head {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 2.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1.875vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #222222;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 1.25vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.625vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #880088;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-eyes {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 0.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff4444;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0.625vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 3.75vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 3.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(45deg, #333333, #880088);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 3.125vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.625vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.25vw #880088;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-arm-left, .enemy-arm-right {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 2.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #880088;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 3.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-arm-left { left: 0.625vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-arm-right { right: 0.625vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-leg-left, .enemy-leg-right {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 2.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #333333;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #880088;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-leg-left { left: 1vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemy-leg-right { right: 1vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 10vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 12.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: left 0.2s ease, bottom 0.2s ease;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-robot {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-turban {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 12.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(to right, #ffffff, #dddddd);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: -3.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 1.25vw 1.25vw 0 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.25vw #aaaaaa, inset 1.25vw 0 0.625vw rgba(0, 0, 0, 0.2), inset -1.25vw 0 0.625vw rgba(0, 0, 0, 0.2), inset 2.5vw 0 0.625vw rgba(0, 0, 0, 0.1), inset -2.5vw 0 0.625vw rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-head {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 3.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #222222;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 1.25vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.625vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.25vw #880088;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-eyes {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 3vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff4444;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 1.25vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 7.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 6.25vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(45deg, #ff4444, #880088);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.625vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.875vw #ff4444;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-belt {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 8.75vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1.875vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff8800;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 8.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.25vw #ff4444;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-health-bar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 10vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1.25vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #00ff00;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: -6.25vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 0.125vw solid #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: width 0.2s, background-color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-arm-left, .boss-arm-right {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 2vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #880088;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 6.25vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-arm-left { left: 0.625vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-arm-right { right: 0.625vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-leg-left, .boss-leg-right {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 2.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #333333;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.375vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.25vw #880088;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-leg-left { left: 1.875vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-leg-right { right: 1.875vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-propulsor {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 2vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 2.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff4444;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: -2.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-propulsor-left { left: 1.875vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-propulsor-right { right: 1.875vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-propulsor-fire {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 2vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 3.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(to bottom, #ff4444, #ff8800);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: -6.25vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0 0 0.625vw 0.625vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-propulsor-fire-left { left: 1.875vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.boss-propulsor-fire-right { right: 1.875vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.enemyBullet {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1.875vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff4444;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #ff4444;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.grenade {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 3.75vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 3.75vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff8800;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0.625vw #ff8800;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.grenade-explosion {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 7.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 7.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: radial-gradient(circle, #ff8800, #ff4444, transparent);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: grenadeExplode 0.5s forwards;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes grenadeExplode {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: scale(0); opacity: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: scale(2); opacity: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.explosion {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 12.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 12.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: radial-gradient(circle, #ff8800, #ff4444, transparent);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1002;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: explode 1s forwards;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes explode {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: scale(0); opacity: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: scale(2); opacity: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.powerup {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 2.5vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 2.5vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 10;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.25vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.5s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.powerup-life {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #00ff00;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.25vw #00ff00;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.powerup-gun {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff00ff;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 1.25vw #ff00ff;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.popup {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translate(-50%, -50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(0, 0, 0, 0.9);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 2vh 4vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 0.5vw solid #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 2vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1000;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 80vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 3vw #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 0 0 1vw #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 4vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.popup h2 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 6vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.popup button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 2vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 2vh 4vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 4vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 0.5vw solid #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 1vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #000;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 0 0 1vw #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.popup button:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#bossMessage {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translate(-50%, -50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(0, 0, 0, 0.8);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 2vh 4vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1vw solid #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 2vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 0 0 1vw #ff00ff, 0 0 2vw #ff00ff, 0 0 3vw #00ffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1001;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: fatalityFade 0.5s ease-in-out;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes fatalityFade {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#controls {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 20vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1000;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.control-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 15vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 10vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(0, 255, 255, 0.7);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 0.5vw solid #ff00ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 2vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #000;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 4vw;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 10vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>user-select: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>touch-action: manipulation;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#left-btn { margin-left: 2vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#right-btn { margin-right: 2vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#jump-btn { margin-right: 2vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#crouch-btn { margin-right: 2vw; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#shoot-btn { width: 20vw; margin-right: 2vw; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Orbitron&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="title"&gt;BARGACOP&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="gameInfo"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Vidas: &lt;span id="lives"&gt;3&lt;/span&gt; | Enemigos eliminados: &lt;span id="score"&gt;0&lt;/span&gt; | Nivel: &lt;span id="level"&gt;1&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="gameCanvas"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="background"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="cityscape" class="layer"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="ground" class="layer"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="player"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="robot"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="robot-head"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="robot-eyes"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="robot-body"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="robot-arm-left"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="robot-arm-right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="machine-gun-barrel"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="machine-gun-details"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="robot-leg-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="propulsor propulsor-left"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="propulsor-fire propulsor-fire-left"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="robot-leg-right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="propulsor propulsor-right"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="propulsor-fire propulsor-fire-right"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="startPopup" class="popup"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;BARGACOP&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Corre con WASD o botones: W/Subir salta, S/Bajar agáchate, A/Izq. y D/Der. mueve.&lt;br&gt;Dispara con ESPACIO o botón.&lt;br&gt;¡Sobrevive en Barcelona!&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="showIntro1()"&gt;Iniciar&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="introPopup1" class="popup" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Año 2049&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Barcelona ha caído en el caos. La ciudad, antaño vibrante, es ahora un campo de batalla de neón y sombras.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="showIntro2()"&gt;Siguiente&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="introPopup2" class="popup" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;El dominio de los Moros&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Los Moros, una facción tecnológicamente avanzada, han tomado el control. Sus robots oscuros patrullan las calles.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="showIntro3()"&gt;Siguiente&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="introPopup3" class="popup" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;La última esperanza&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Eres Bargacop, un policía rebelde robótico. Tu misión: liberar Barcelona del yugo opresor.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="startGame()"&gt;¡Comenzar!&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="gameOverPopup" class="popup" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;¡Sistema Colapsado!&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Enemigos eliminados: &lt;span id="finalScore"&gt;0&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="restartGame()"&gt;Reiniciar&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="levelUpPopup" class="popup" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;¡Nivel 1 Completado!&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Bargacop ahora puede volar. Usa W/S o Subir/Bajar para subir/bajar, A/D o Izq./Der. para moverte.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="startLevel2()"&gt;Nivel 2&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="victoryPopup" class="popup" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;¡Victoria!&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Bargacop ha liberado a Barcelona de los Moros.&lt;br&gt;Puntuación: &lt;span id="victoryScore"&gt;0&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="restartGame()"&gt;Reiniciar&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="bossMessage"&gt;SEGARRO AMIGO!&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="controls"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="left-btn" class="control-btn"&gt;Izq.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="right-btn" class="control-btn"&gt;Der.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="shoot-btn" class="control-btn"&gt;Disparar&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="crouch-btn" class="control-btn"&gt;Bajar&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="jump-btn" class="control-btn"&gt;Subir&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const canvas = document.getElementById('gameCanvas');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const player = document.getElementById('player');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const livesDisplay = document.getElementById('lives');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const scoreDisplay = document.getElementById('score');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const levelDisplay = document.getElementById('level');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const startPopup = document.getElementById('startPopup');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const introPopup1 = document.getElementById('introPopup1');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const introPopup2 = document.getElementById('introPopup2');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const introPopup3 = document.getElementById('introPopup3');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const gameOverPopup = document.getElementById('gameOverPopup');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const levelUpPopup = document.getElementById('levelUpPopup');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const victoryPopup = document.getElementById('victoryPopup');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const victoryScoreDisplay = document.getElementById('victoryScore');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const bossMessage = document.getElementById('bossMessage');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const cityscape = document.getElementById('cityscape');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const ground = document.getElementById('ground');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let playerX = 50;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let playerY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let velocityX = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let velocityY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let isJumping = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let isCrouching = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let jumpHeight = 100;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let enemies = [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let bullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let enemyBullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let powerups = [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let lives = 3;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let score = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let normalEnemiesKilled = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let enemySpawnCount = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let level = 1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let gameStarted = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let hasTripleShot = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let isFlying = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let isBossActive = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let gameLoopId = null;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const GRAVITY = 0.5;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const SPEED = 5;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Controles</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const keys = {};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let canShoot = true;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Controles táctiles</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const leftBtn = document.getElementById('left-btn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const rightBtn = document.getElementById('right-btn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const jumpBtn = document.getElementById('jump-btn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const crouchBtn = document.getElementById('crouch-btn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const shootBtn = document.getElementById('shoot-btn');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>leftBtn.addEventListener('touchstart', () =&gt; keys['a'] = true);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>leftBtn.addEventListener('touchend', () =&gt; keys['a'] = false);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>rightBtn.addEventListener('touchstart', () =&gt; keys['d'] = true);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>rightBtn.addEventListener('touchend', () =&gt; keys['d'] = false);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>jumpBtn.addEventListener('touchstart', () =&gt; keys['w'] = true);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>jumpBtn.addEventListener('touchend', () =&gt; keys['w'] = false);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>crouchBtn.addEventListener('touchstart', () =&gt; keys['s'] = true);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>crouchBtn.addEventListener('touchend', () =&gt; keys['s'] = false);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>shootBtn.addEventListener('touchstart', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (canShoot) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>shoot();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>canShoot = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>shootBtn.addEventListener('touchend', () =&gt; canShoot = true);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener('keydown', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!gameStarted) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>keys[e.key.toLowerCase()] = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (e.key === ' ' &amp;&amp; canShoot) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>shoot();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>canShoot = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener('keyup', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!gameStarted) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>keys[e.key.toLowerCase()] = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (e.key === ' ') canShoot = true;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Actualizar movimiento del jugador</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updatePlayer() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!gameStarted) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (level === 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (keys['a']) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityX = -SPEED;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.transform = 'rotate(-30deg)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (keys['d']) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityX = SPEED;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.transform = 'rotate(30deg)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityX *= 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.transform = 'rotate(0deg)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>playerX += velocityX;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>playerX = Math.max(0, Math.min(93, playerX));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.style.left = playerX + 'vw';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (keys['w'] &amp;&amp; !isJumping) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>isJumping = true;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityY = 12;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.classList.add('jumping');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.animation = 'flip 0.5s linear';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>player.classList.remove('jumping');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>player.style.animation = 'float 1.5s infinite ease-in-out';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, 500);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (keys['s'] &amp;&amp; !isCrouching) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>isCrouching = true;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.height = '5.25vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (!keys['s'] &amp;&amp; isCrouching) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>isCrouching = false;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.height = '10.5vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>velocityY -= GRAVITY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>playerY += velocityY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.style.bottom = playerY + 'vh';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (playerY &lt;= 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>playerY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>isJumping = false;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.bottom = '0vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (level === 2) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const propulsors = document.querySelectorAll('.propulsor');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const propulsorFires = document.querySelectorAll('.propulsor-fire');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>propulsors.forEach(p =&gt; p.style.display = 'block');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (keys['w']) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityY = SPEED;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (keys['s']) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityY = -SPEED;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityY *= 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (keys['a']) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityX = -SPEED;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.transform = 'rotate(-30deg)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (keys['d']) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityX = SPEED;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.transform = 'rotate(30deg)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityX *= 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.transform = 'rotate(0deg)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>playerX += velocityX;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>playerY += velocityY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>playerX = Math.max(0, Math.min(93, playerX));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>playerY = Math.max(0, Math.min(39.5, playerY));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.style.left = playerX + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.style.bottom = playerY + 'vh';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (keys['w'] || keys['s'] || keys['a'] || keys['d']) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>propulsorFires.forEach(f =&gt; f.style.display = 'block');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>propulsorFires.forEach(f =&gt; f.style.display = 'none');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (keys['s'] &amp;&amp; !isCrouching &amp;&amp; !keys['w']) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>isCrouching = true;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.height = '5.25vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (!keys['s'] &amp;&amp; isCrouching) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>isCrouching = false;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>player.style.height = '10.5vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Disparar desde el personaje</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function shoot() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const bullet = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullet.classList.add('bullet');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullet.style.left = (playerX + 7) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullet.style.bottom = (playerY + (isCrouching ? 3.5 : 6.125)) + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>canvas.appendChild(bullet);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullets.push(bullet);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let bulletX = playerX + 7;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const bulletInterval = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bulletX += 1.25;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bullet.style.left = bulletX + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>checkCollision(bullet, bulletInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (bulletX &gt; 100) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>clearInterval(bulletInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullets = bullets.filter(b =&gt; b !== bullet);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 20);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (hasTripleShot) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const bulletUp = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bulletUp.classList.add('bullet');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bulletUp.style.left = (playerX + 7) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bulletUp.style.bottom = (playerY + (isCrouching ? 4.125 : 6.75)) + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>canvas.appendChild(bulletUp);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bullets.push(bulletUp);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>let bulletXUp = playerX + 7;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const bulletIntervalUp = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletXUp += 1.25;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletUp.style.left = bulletXUp + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>checkCollision(bulletUp, bulletIntervalUp);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (bulletXUp &gt; 100) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>clearInterval(bulletIntervalUp);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bulletUp.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bullets = bullets.filter(b =&gt; b !== bulletUp);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}, 20);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const bulletDown = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bulletDown.classList.add('bullet');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bulletDown.style.left = (playerX + 7) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bulletDown.style.bottom = (playerY + (isCrouching ? 2.875 : 5.5)) + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>canvas.appendChild(bulletDown);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bullets.push(bulletDown);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>let bulletXDown = playerX + 7;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const bulletIntervalDown = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletXDown += 1.25;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletDown.style.left = bulletXDown + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>checkCollision(bulletDown, bulletIntervalDown);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (bulletXDown &gt; 100) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>clearInterval(bulletIntervalDown);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bulletDown.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bullets = bullets.filter(b =&gt; b !== bulletDown);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}, 20);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Colisión bala-enemigo</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function checkCollision(bullet, bulletInterval) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const bulletRect = bullet.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies.forEach((enemy, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const enemyRect = enemy.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (bulletRect.left &lt; enemyRect.right &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletRect.right &gt; enemyRect.left &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletRect.top &lt; enemyRect.bottom &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletRect.bottom &gt; enemyRect.top) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (enemy.classList.contains('boss')) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>enemy.health--;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>updateBossHealthBar(enemy);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (enemy.health &lt;= 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>clearInterval(enemy.shootInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>triggerExplosion(parseFloat(enemy.style.left), parseFloat(enemy.style.bottom));</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>enemy.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>enemies.splice(index, 1);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>score += 10;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>scoreDisplay.textContent = score;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>isBossActive = false;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>resumeBackground();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (level === 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>setTimeout(endLevel1, 2000);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>} else if (level === 2) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>setTimeout(winGame, 2000);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>clearInterval(enemy.shootInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>enemy.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>enemies.splice(index, 1);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>normalEnemiesKilled++;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>score++;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>scoreDisplay.textContent = score;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (Math.random() &lt; 0.2) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>dropPowerup(enemyX, enemyY);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (normalEnemiesKilled % 15 === 0 &amp;&amp; !hasBoss()) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>showBossMessage();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>setTimeout(spawnBoss, 2000);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>clearInterval(bulletInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullets = bullets.filter(b =&gt; b !== bullet);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Actualizar barra de vida del jefe</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateBossHealthBar(boss) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const healthBar = boss.querySelector('.boss-health-bar');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (healthBar) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const healthPercentage = (boss.health / boss.maxHealth) * 100;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>healthBar.style.width = `${healthPercentage * 0.8}vw`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>healthBar.style.backgroundColor = `hsl(${healthPercentage}, 100%, 50%)`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Generar power-up al matar enemigo</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function dropPowerup(x, y) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const powerup = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerup.classList.add('powerup');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerup.classList.add(Math.random() &lt; 0.5 ? 'powerup-life' : 'powerup-gun');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerup.style.left = x + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerup.style.bottom = y + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>canvas.appendChild(powerup);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups.push(powerup);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let powerupX = x;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let powerupY = y;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let velocityY = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const powerupInterval = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>velocityY -= GRAVITY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>powerupY += velocityY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>powerup.style.bottom = powerupY + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (powerupY &lt;= 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>powerupY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>powerup.style.bottom = '0vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!powerup.parentElement) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>clearInterval(powerupInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>powerups = powerups.filter(p =&gt; p !== powerup);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 20);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Verificar si hay un jefe activo</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function hasBoss() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return enemies.some(enemy =&gt; enemy.classList.contains('boss'));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Mostrar mensaje del jefe</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showBossMessage() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bossMessage.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bossMessage.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 2000);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isBossActive = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>pauseBackground();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Crear explosión</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function triggerExplosion(x, y) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const explosion = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>explosion.classList.add('explosion');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>explosion.style.left = (x - 6.25) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>explosion.style.bottom = y + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>canvas.appendChild(explosion);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; explosion.remove(), 1000);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Pausar fondo</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function pauseBackground() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cityscape.style.animationPlayState = 'paused';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ground.style.animationPlayState = 'paused';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Reanudar fondo</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function resumeBackground() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cityscape.style.animationPlayState = 'running';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ground.style.animationPlayState = 'running';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Colisión bala/granada enemiga-jugador y onda expansiva</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function checkPlayerCollision() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!gameStarted) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const playerRect = player.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets.forEach((bullet, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const bulletRect = bullet.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (bulletRect.left &lt; playerRect.right &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletRect.right &gt; playerRect.left &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletRect.top &lt; playerRect.bottom &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bulletRect.bottom &gt; playerRect.top) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemyBullets.splice(index, 1);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>lives--;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>livesDisplay.textContent = lives;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (lives &lt;= 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>endGame();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups.forEach((powerup, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const powerupRect = powerup.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (playerRect.left &lt; powerupRect.right &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>playerRect.right &gt; powerupRect.left &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>playerRect.top &lt; powerupRect.bottom &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>playerRect.bottom &gt; powerupRect.top) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (powerup.classList.contains('powerup-life')) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>lives++;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>livesDisplay.textContent = lives;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (powerup.classList.contains('powerup-gun')) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>hasTripleShot = true;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>setTimeout(() =&gt; hasTripleShot = false, 10000);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>powerup.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>powerups.splice(index, 1);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Generar enemigos normales (robots oscuros con turbante, 1 de vida)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function spawnEnemy() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!gameStarted || hasBoss()) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const enemy = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemy.classList.add('enemy');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemy.style.left = '100vw';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemy.health = 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemy.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="enemy-robot"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="enemy-turban"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="enemy-head"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="enemy-eyes"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="enemy-body"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="enemy-arm-left"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="enemy-arm-right"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="enemy-leg-left"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="enemy-leg-right"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>canvas.appendChild(enemy);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies.push(enemy);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemySpawnCount++;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let isGrenadeEnemy = enemySpawnCount % 5 === 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let enemyX = 100;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let enemyY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let velocityX = -0.25;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let velocityY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let isJumping = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let isCrouching = false;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function updateEnemy() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!enemy.parentElement) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const rand = Math.random();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (rand &lt; 0.7) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityX = -0.25;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (rand &lt; 0.85) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityX = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityX = 0.25;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemyX += velocityX;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemyX = Math.max(0, Math.min(95, enemyX));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemy.style.left = enemyX + 'vw';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (Math.random() &lt; 0.05 &amp;&amp; !isJumping &amp;&amp; !isCrouching) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (Math.random() &lt; 0.5) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>isJumping = true;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>velocityY = 12;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>isCrouching = true;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>enemy.style.height = '3.75vh';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>velocityY -= GRAVITY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemyY += velocityY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemy.style.bottom = enemyY + 'vh';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (enemyY &lt;= 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemyY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>isJumping = false;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemy.style.bottom = '0vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (isCrouching &amp;&amp; Math.random() &lt; 0.1) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>isCrouching = false;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemy.style.height = '7.5vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (enemyX &lt;= 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemy.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemies = enemies.filter(e =&gt; e !== enemy);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemy.shootInterval = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (isGrenadeEnemy) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const grenade = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>grenade.classList.add('grenade');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>grenade.style.left = (enemyX - 1.875) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>grenade.style.bottom = (enemyY + (isCrouching ? 2.5 : 6.25)) + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>canvas.appendChild(grenade);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemyBullets.push(grenade);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let grenadeX = enemyX - 1.875;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let grenadeY = enemyY + (isCrouching ? 2.5 : 6.25);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const dx = playerX - grenadeX;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const dy = playerY - grenadeY;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const distance = Math.sqrt(dx * dx + dy * dy);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const speed = 1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const vx = (dx / distance) * speed;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const vy = (dy / distance) * speed;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const grenadeInterval = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grenadeX += vx;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grenadeY += vy;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grenade.style.left = grenadeX + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grenade.style.bottom = grenadeY + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (grenadeY &lt;= 0 || grenadeX &lt; 0 || grenadeX &gt; 100 || grenadeY &gt; 50) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>clearInterval(grenadeInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>grenade.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>enemyBullets = enemyBullets.filter(b =&gt; b !== grenade);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>triggerGrenadeExplosion(grenadeX, grenadeY);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, 20);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const bullet1 = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet1.classList.add('enemyBullet');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet1.style.left = (enemyX - 1.875) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet1.style.bottom = (enemyY + (isCrouching ? 2.5 : 6.25)) + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>canvas.appendChild(bullet1);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemyBullets.push(bullet1);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let bulletX1 = enemyX - 1.875;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let bulletY1 = enemyY + (isCrouching ? 2.5 : 6.25);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let dx1 = playerX - bulletX1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let dy1 = playerY - bulletY1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let distance1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let speed1 = 0.625;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let vx1 = (dx1 / distance1) * speed1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let vy1 = (dy1 / distance1) * speed1;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const bulletInterval1 = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bulletX1 += vx1;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bulletY1 += vy1;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bullet1.style.left = bulletX1 + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bullet1.style.bottom = bulletY1 + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (bulletX1 &lt; 0 || bulletX1 &gt; 100 || bulletY1 &lt; 0 || bulletY1 &gt; 50) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>clearInterval(bulletInterval1);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>bullet1.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>enemyBullets = enemyBullets.filter(b =&gt; b !== bullet1);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, 20);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const bullet2 = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet2.classList.add('enemyBullet');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet2.style.left = (enemyX - 1.875) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet2.style.bottom = (enemyY + (isCrouching ? 3.125 : 6.875)) + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>canvas.appendChild(bullet2);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemyBullets.push(bullet2);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let bulletX2 = enemyX - 1.875;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let bulletY2 = enemyY + (isCrouching ? 3.125 : 6.875);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let dx2 = playerX - bulletX2 + (Math.random() * 1.25 - 0.625);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let dy2 = playerY - bulletY2 + (Math.random() * 1.25 - 0.625);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let distance2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let speed2 = 0.625;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let vx2 = (dx2 / distance2) * speed2;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let vy2 = (dy2 / distance2) * speed2;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const bulletInterval2 = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bulletX2 += vx2;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bulletY2 += vy2;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bullet2.style.left = bulletX2 + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bullet2.style.bottom = bulletY2 + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (bulletX2 &lt; 0 || bulletX2 &gt; 100 || bulletY2 &lt; 0 || bulletY2 &gt; 50) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>clearInterval(bulletInterval2);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>bullet2.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>enemyBullets = enemyBullets.filter(b =&gt; b !== bullet2);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, 20);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 1000);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemy.update = updateEnemy;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Generar onda expansiva de granada</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function triggerGrenadeExplosion(x, y) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const explosion = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>explosion.classList.add('grenade-explosion');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>explosion.style.left = (x - 3.75) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>explosion.style.bottom = y + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>canvas.appendChild(explosion);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets.push(explosion);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explosion.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemyBullets = enemyBullets.filter(b =&gt; b !== explosion);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 500);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Generar jefe (moro gigante, vuela en nivel 2, tira menos granadas)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function spawnBoss() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!gameStarted) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const boss = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>boss.classList.add('enemy', 'boss');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>boss.style.left = '87.5vw';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>boss.health = 10;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>boss.maxHealth = 10;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>boss.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="boss-robot"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="boss-health-bar"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="boss-turban"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="boss-head"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="boss-eyes"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="boss-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="boss-belt"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="boss-arm-left"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="boss-arm-right"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="boss-leg-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>${level === 2 ? '&lt;div class="boss-propulsor boss-propulsor-left"&gt;&lt;/div&gt;&lt;div class="boss-propulsor-fire boss-propulsor-fire-left"&gt;&lt;/div&gt;' : ''}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="boss-leg-right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>${level === 2 ? '&lt;div class="boss-propulsor boss-propulsor-right"&gt;&lt;/div&gt;&lt;div class="boss-propulsor-fire boss-propulsor-fire-right"&gt;&lt;/div&gt;' : ''}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>canvas.appendChild(boss);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies.push(boss);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let bossX = 87.5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let bossY = (level === 2 ? 12.5 : 0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let velocityX = 0.25;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let velocityY = (level === 2 ? 0.125 : 0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let stepDirection = 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let rotationAngle = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let stepTimer = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let movingForward = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let movingUp = true;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function updateBoss() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!boss.parentElement) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>stepTimer += 0.1;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (stepTimer &gt;= 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>stepTimer = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (level === 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bossY = bossY === 0 ? 1.25 : 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (movingUp) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>bossY += velocityY;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (bossY &gt;= 37.5) movingUp = false;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>bossY -= velocityY;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (bossY &lt;= 6.25) movingUp = true;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bossY = Math.max(6.25, Math.min(37.5, bossY));</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>stepDirection *= -1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>rotationAngle = stepDirection * 30;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>boss.style.transform = `rotate(${rotationAngle}deg)`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (movingForward) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bossX += velocityX;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (bossX &gt;= 90) movingForward = false;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bossX -= velocityX;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (bossX &lt;= 75) movingForward = true;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bossX = Math.max(75, Math.min(90, bossX));</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>boss.style.left = bossX + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>boss.style.bottom = bossY + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>boss.shootInterval = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (Math.random() &lt; 0.7) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const bullet = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet.classList.add('enemyBullet');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet.style.left = (bossX - 1.875) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bullet.style.bottom = (bossY + 6.25) + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>canvas.appendChild(bullet);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemyBullets.push(bullet);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let bulletX = bossX - 1.875;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let bulletY = bossY + 6.25;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const dx = playerX - bulletX;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const dy = playerY - bulletY;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const distance = Math.sqrt(dx * dx + dy * dy);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const speed = 0.875;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const vx = (dx / distance) * speed;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const vy = (dy / distance) * speed;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const bulletInterval = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bulletX += vx;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bulletY += vy;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bullet.style.left = bulletX + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>bullet.style.bottom = bulletY + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (bulletX &lt; 0 || bulletX &gt; 100 || bulletY &lt; 0 || bulletY &gt; 50) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>clearInterval(bulletInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>bullet.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>enemyBullets = enemyBullets.filter(b =&gt; b !== bullet);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, 20);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const grenade = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>grenade.classList.add('grenade');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>grenade.style.left = (bossX - 1.875) + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>grenade.style.bottom = (bossY + 6.25) + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>canvas.appendChild(grenade);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enemyBullets.push(grenade);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let grenadeX = bossX - 1.875;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let grenadeY = bossY + 6.25;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const dx = playerX - grenadeX;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const dy = playerY - grenadeY;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const distance = Math.sqrt(dx * dx + dy * dy);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const speed = 1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const vx = (dx / distance) * speed;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const vy = (dy / distance) * speed;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const grenadeInterval = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grenadeX += vx;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grenadeY += vy;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grenade.style.left = grenadeX + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grenade.style.bottom = grenadeY + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (grenadeY &lt;= 0 || grenadeX &lt; 0 || grenadeX &gt; 100 || grenadeY &gt; 50) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>clearInterval(grenadeInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>grenade.remove();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>enemyBullets = enemyBullets.filter(b =&gt; b !== grenade);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>triggerGrenadeExplosion(grenadeX, grenadeY);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, 20);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 1000);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>boss.update = updateBoss;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateBossHealthBar(boss);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Generar power-ups</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function spawnPowerup() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!gameStarted) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const powerup = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerup.classList.add('powerup');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerup.classList.add(Math.random() &lt; 0.5 ? 'powerup-life' : 'powerup-gun');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerup.style.left = '100vw';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerup.style.bottom = (Math.random() * 37.5) + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>canvas.appendChild(powerup);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups.push(powerup);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let powerupX = 100;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let powerupY = parseFloat(powerup.style.bottom);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let velocityY = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const powerupInterval = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>velocityY -= GRAVITY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>powerupY += velocityY;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>powerup.style.bottom = powerupY + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (powerupY &lt;= 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>powerupY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>velocityY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>powerup.style.bottom = '0vh';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!powerup.parentElement) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>clearInterval(powerupInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>powerups = powerups.filter(p =&gt; p !== powerup);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 20);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Generar enemigos y power-ups de forma aleatoria</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function randomSpawn() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!gameStarted || hasBoss()) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>spawnEnemy();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const nextSpawn = Math.random() * 2000 + 1000;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(randomSpawn, nextSpawn);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Mostrar pop-ups introductorios</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showIntro1() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>startPopup.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>introPopup1.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showIntro2() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>introPopup1.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>introPopup2.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showIntro3() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>introPopup2.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>introPopup3.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Iniciar juego</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function startGame() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>introPopup3.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameStarted = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>level = 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>normalEnemiesKilled = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>score = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>lives = 3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>scoreDisplay.textContent = score;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>livesDisplay.textContent = lives;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>levelDisplay.textContent = level;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resumeBackground();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>randomSpawn();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameLoop();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Terminar nivel 1</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function endLevel1() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameStarted = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies.forEach(enemy =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>clearInterval(enemy.shootInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemy.remove();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullets.forEach(bullet =&gt; bullet.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets.forEach(bullet =&gt; bullet.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups.forEach(powerup =&gt; powerup.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>levelUpPopup.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>normalEnemiesKilled = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Iniciar nivel 2</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function startLevel2() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>levelUpPopup.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>level = 2;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>levelDisplay.textContent = level;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isFlying = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>playerY = 12.5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>player.style.bottom = playerY + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameStarted = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resumeBackground();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>randomSpawn();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameLoop();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Terminar juego con victoria</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function winGame() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameStarted = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (gameLoopId) cancelAnimationFrame(gameLoopId);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies.forEach(enemy =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>clearInterval(enemy.shootInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemy.remove();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullets.forEach(bullet =&gt; bullet.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets.forEach(bullet =&gt; bullet.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups.forEach(powerup =&gt; powerup.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>victoryScoreDisplay.textContent = score;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>victoryPopup.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Terminar juego con derrota</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function endGame() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>console.log("Game over! Lives:", lives);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameStarted = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (gameLoopId) cancelAnimationFrame(gameLoopId);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies.forEach(enemy =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>clearInterval(enemy.shootInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemy.remove();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullets.forEach(bullet =&gt; bullet.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets.forEach(bullet =&gt; bullet.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups.forEach(powerup =&gt; powerup.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>finalScoreDisplay.textContent = score;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>gameOverPopup.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 100);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Reiniciar juego</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function restartGame() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameOverPopup.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>victoryPopup.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>lives = 3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>score = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>normalEnemiesKilled = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemySpawnCount = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>hasTripleShot = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>level = 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isFlying = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isBossActive = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>levelDisplay.textContent = level;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>livesDisplay.textContent = lives;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>scoreDisplay.textContent = score;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies.forEach(enemy =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>clearInterval(enemy.shootInterval);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>enemy.remove();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullets.forEach(bullet =&gt; bullet.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets.forEach(bullet =&gt; bullet.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemyBullets = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups.forEach(powerup =&gt; powerup.remove());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>powerups = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>playerX = 6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>playerY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>velocityX = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>velocityY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>player.style.left = playerX + 'vw';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>player.style.bottom = playerY + 'vh';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>player.style.transform = 'rotate(0deg)';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>player.style.animation = 'float 1.5s infinite ease-in-out';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.propulsor').forEach(p =&gt; p.style.display = 'none');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.propulsor-fire').forEach(f =&gt; f.style.display = 'none');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameStarted = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resumeBackground();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>randomSpawn();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameLoop();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Bucle principal del juego</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function gameLoop(timestamp) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!gameStarted) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!lastFrameTime) lastFrameTime = timestamp;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const deltaTime = timestamp - lastFrameTime;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>lastFrameTime = timestamp;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>updatePlayer();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>checkPlayerCollision();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>enemies.forEach(enemy =&gt; enemy.update());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gameLoopId = requestAnimationFrame(gameLoop);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
